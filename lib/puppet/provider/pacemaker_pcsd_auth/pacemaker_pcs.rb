@@ -96,7 +96,7 @@ Puppet::Type.type(:pacemaker_pcsd_auth).provide(:pcs, parent: Puppet::Provider::
   # @return [String]
   def node_name
     return @node_name if @node_name
-    @node_name = crm_node('-n').chomp.strip
+    @node_name = `hostname`.chomp.strip
   end
 
   # check if the local node auth have been successful
