@@ -178,7 +178,7 @@ class pacemaker::new::setup::pcsd (
 
     exec { 'create-cluster' :
       creates => '/etc/cluster/cluster.conf',
-      command => "${pcs_bin_path} cluster setup --name ${cluster_name} ${cluster_setup_nodes_list} ${cluster_options_list}",
+      command => "${pcs_bin_path} cluster setup ${cluster_name} ${cluster_setup_nodes_list} ${cluster_options_list}",
       unless  => '/usr/bin/test -f /etc/corosync/corosync.conf',
       tag     => 'pacemaker-setup',
     }
