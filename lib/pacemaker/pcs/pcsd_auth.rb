@@ -11,7 +11,7 @@ module Pacemaker
     # @param local [String] auth only the local node
     # @return [String,nil]
     def pcs_auth_command(nodes, username, password, force=false, local=false)
-      command = %w(cluster auth --debug)
+      command = %w(host auth --debug)
       command << '--force' if force
       command << '--local' if local
       command += [ '-u', username ]
