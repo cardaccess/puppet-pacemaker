@@ -118,41 +118,19 @@ define pacemaker::resource::remote(
   $deep_compare       = lookup('pacemaker::resource::remote::deep_compare', undef, undef, false),
   $update_settle_secs = lookup('pacemaker::resource::remote::update_settle_secs', undef, undef, 600),
 ) {
-  # If we use pcs 0.10 we use the new pcs node remote-add way of adding
-  # remotes *except* if force_oldstyle is set to true
-  if $::pacemaker::params::pcs_010 and !$force_oldstyle {
-    pcmk_remote { $name:
-      ensure             => $ensure,
-      remote_address     => $remote_address,
-      reconnect_interval => $reconnect_interval,
-      resource_params    => $resource_params,
-      meta_params        => $meta_params,
-      op_params          => $op_params,
-      tries              => $tries,
-      try_sleep          => $try_sleep,
-      pcs_user           => $pcs_user,
-      pcs_password       => $pcs_password,
-      deep_compare       => $deep_compare,
-      update_settle_secs => $update_settle_secs,
-      force              => $force,
-    }
-  } else {
-    pcmk_resource { $name:
-      ensure             => $ensure,
-      resource_type      => 'remote',
-      remote_address     => $remote_address,
-      reconnect_interval => $reconnect_interval,
-      resource_params    => $resource_params,
-      meta_params        => $meta_params,
-      op_params          => $op_params,
-      bundle             => $bundle,
-      tries              => $tries,
-      try_sleep          => $try_sleep,
-      verify_on_create   => $verify_on_create,
-      force              => $force,
-      location_rule      => $location_rule,
-      deep_compare       => $deep_compare,
-      update_settle_secs => $update_settle_secs,
-    }
+  pcmk_remote { $name:
+    ensure             => $ensure,
+    remote_address     => $remote_address,
+    reconnect_interval => $reconnect_interval,
+    resource_params    => $resource_params,
+    meta_params        => $meta_params,
+    op_params          => $op_params,
+    tries              => $tries,
+    try_sleep          => $try_sleep,
+    pcs_user           => $pcs_user,
+    pcs_password       => $pcs_password,
+    deep_compare       => $deep_compare,
+    update_settle_secs => $update_settle_secs,
+    force              => $force,
   }
-}
+} 
